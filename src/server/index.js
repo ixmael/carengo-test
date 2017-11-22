@@ -20,13 +20,14 @@ app.engine('html', atpl.__express)
 app.set('view engine', 'html');
 app.set('views', path.join(templatesPath));
 
-app.get('/productos', function(request, response) {
+const productsUrl = '/productos';
+app.get(productsUrl, function(request, response) {
     const page = request.query.page;
     response.json({test: 'test'});
 });
 
 app.get('/', function(request, response) {
-    response.render("index", { test: 'probando :3'});
+    response.render("index", { productsUrl: productsUrl});
 });
 
 // Fire it up!

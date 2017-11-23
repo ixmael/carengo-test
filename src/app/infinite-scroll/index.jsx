@@ -6,9 +6,10 @@ export default class extends React.Component {
         super(props);
 
         this.state = {
-            currentPage: 1,
+            page: 1,
+            products: [],
             totalProducts: 0,
-            products: []
+            isAllLoaded: false
         };
 
         this.loadNext = this.loadNext.bind(this);
@@ -20,37 +21,53 @@ export default class extends React.Component {
 
     loadNext() {
         const self = this;
-        const { products, currentPage } = this.state;
+        const { page, isAllLoaded, products } = this.state;
 
-        axios.get(this.props.feedApi, { params: { page: currentPage + 1 }})
-            .then(response => {
-                const data = response.data;
-                self.setState({
-                    ...self.state,
-                    currentPage: data.currentPage,
-                    totalProducts: totalProducts,
-                    products: products.concat(data.products)
-                });
-            })
-            .catch(err => console.log(err));
+        if(!isAllLoaded) {
+            axios.get(this.props.feedApi, { params: { page: page }})
+                .then(response => {
+                    const data = response.data;
+
+                    const remoteProducts = data.products;
+                    let all = false;
+                    if('all' in data) {
+                        all = data.all;
+                    }
+                    self.setState({
+                        ...self.state,
+                        page: page + 1,
+                        products: products.concat(remoteProducts),
+                        totalProducts: data.totalProducts,
+                        isAllLoaded: all
+                    });
+                })
+                .catch(err => console.log(err));
+        }
     }
 
     render() {
-        const { products, totalProducts } = this.state;
+        const { products, totalProducts, currentPage } = this.state;
 
-        let productsView = (<div>No hay productos</div>);
+        let productsView = (<div></div>);
         if(0 < products.length) {
-            productsView = products.map((p, i) => (<div key={i} className="element">{p.name}</div>));
+            productsView = products.map((p, i) => (<div key={i} className="element">{p.title}</div>));
         }
 
         let buttonLoad = (<button onClick={this.loadNext}>Cargar más</button>);
-        if(products.length == totalProducts)
+        //if(products.length == totalProducts)
+
+        let status = (<div>Cargando productos...</div>);
+        if(0 != totalProducts) {
+            status = (<div>{products.length} de {totalProducts}</div>);
+        }
 
         return (
             <div id="infinite-scroll-component">
-                <div>Lista de productos</div>
+                <div>
+                    <h1>Lista de productos</h1>
+                    {status}
+                </div>
                 {productsView}
-                <div>Estatus</div>
                 {buttonLoad}
             </div>
         );

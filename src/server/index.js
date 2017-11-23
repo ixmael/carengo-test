@@ -21,41 +21,31 @@ app.set('views', path.join(templatesPath));
 
 const api = config.get('api');
 
-const productsUrl = '/productos';
-app.get(productsUrl, function(request, response) {
+app.get('/productos', function(request, response) {
     const page = parseInt(request.query.page);
 
     const productsRepository = new ProductsRepository();
-    const total = productsRepository.getTotal();
-    const totalPages = Math.ceil(total / api.elementsPerPage);
-
-    let currentPage = 1;
-    let nextPage = 2;
-    if(page) {
-        if(totalPages <= page) {
-            currentPage = totalPages;
-            nextPage = null;
-        }
-        else {
-            currentPage = page;
-            nextPage = page + 1;
+    const totalProducts = productsRepository.getTotal();
+    const totalPages = Math.ceil(totalProducts / api.elementsPerPage);
+    
+    let data = {
+        totalProducts
+    };
+    if(page <= totalPages) {
+        let start = (page - 1) * api.elementsPerPage;
+        let end   = start + api.elementsPerPage;
+        let products = productsRepository.fetch(start, end);
+        data.products = products.products;
+        if('all' in products) {
+            data.all = products.all;
         }
     }
 
-    const start = (currentPage - 1) * api.elementsPerPage;
-    
-    let products = productsRepository.fetch(start, start + api.elementsPerPage);
-    
-    response.json({
-        currentPage: currentPage,
-        nextPage: nextPage,
-        totalProducts: total,
-        products: products
-    });
+    response.json(data);
 });
 
 app.get('/', function(request, response) {
-    response.render("index", { productsUrl: productsUrl});
+    response.render("index", { productsUrl: '/productos'});
 });
 
 // Fire it up!

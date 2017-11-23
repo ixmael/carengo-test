@@ -1,19 +1,22 @@
-import randomstring from 'randomstring';
+import config from 'config';
+import data from './data'
 
 export default class ProductsRepository {
-
     getTotal() {
-        return 23;
+        return data.length;
     }
 
     fetch(start, end) {
-        let products = (new Array(end - start)).fill(0);
-        products.forEach((e, i) => {
-            products[i] = {
-                name: `${randomstring.generate(10)}_${i}`
+        if(data.length < end) {
+            return {
+                products: data.slice(start),
+                all: true
             }
-        });
-
-        return products;
+        }
+        else {
+            return {
+                products: data.slice(start, end)
+            }
+        }
     }
 }

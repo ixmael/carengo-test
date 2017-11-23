@@ -4,11 +4,52 @@
 
 .element {
     background: #FFFFFF;
-    height: 200px;
-    margin-bottom: 10px;
 }
 
-.element img {
-    height: 50px;
-    width: 50px;
+.price {
+    color: red;
+}
+
+@media screen and (min-width: 360px) {
+    #infinite-scroll-component {
+        width: 100%;
+    }
+
+    .element {
+        width: 100%;
+    }
+
+    .element img {
+        height: 50px;
+        width: 50px;
+        display: block;
+        margin: auto;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    #infinite-scroll-component {
+        width: 1024px;
+        display: block;
+        margin: auto;
+        padding-bottom: 10px;
+    }
+
+    .element {
+        width: 980px;
+        display: block;
+        margin: auto;
+    }
+
+    .element img {
+        height: 200px;
+        width: 200px;
+        display: block;
+        margin: auto;
+    }
+
+    .element h4 {
+        font-size: 18px;
+        text-align: center;
+    }
 }

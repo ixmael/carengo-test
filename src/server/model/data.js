@@ -1,46 +1,44 @@
-import randomstring from 'randomstring';
-
 const data = [
     {
-        title: `${randomstring.generate(10)}_1`,
-        image: 'http://via.placeholder.com/150x150/00FFFF/FF0000.png?text=1',
-        desciption: '',
+        title: 'producto 1',
+        image: 'http://via.placeholder.com/150x150/AA00AA/FFFFFF.png?text=1',
+        description: 'But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness.',
         price: 200
     },
     {
-        title: `${randomstring.generate(10)}_2`,
-        image: 'http://via.placeholder.com/150x150/00FFFF/FF0000.png?text=2',
-        desciption: '',
+        title: 'producto 2',
+        image: 'http://via.placeholder.com/150x150/AA00AA/FFFFFF.png?text=2',
+        description: 'But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness.',
         price: 200
     },
     {
-        title: `${randomstring.generate(10)}_3`,
-        image: 'http://via.placeholder.com/150x150/00FFFF/FF0000.png?text=3',
-        desciption: '',
+        title: 'producto 3',
+        image: 'http://via.placeholder.com/150x150/AA00AA/FFFFFF.png?text=3',
+        description: 'But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness.',
         price: 200
     },
     {
-        title: `${randomstring.generate(10)}_4`,
-        image: 'http://via.placeholder.com/150x150/00FFFF/FF0000.png?text=4',
-        desciption: '',
+        title: 'producto 4',
+        image: 'http://via.placeholder.com/150x150/AA00AA/FFFFFF.png?text=4',
+        description: 'But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness.',
         price: 200
     },
     {
-        title: `${randomstring.generate(10)}_5`,
-        image: 'http://via.placeholder.com/150x150/00FFFF/FF0000.png?text=5',
-        desciption: '',
+        title: 'producto 5',
+        image: 'http://via.placeholder.com/150x150/AA00AA/FFFFFF.png?text=5',
+        description: 'But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness.',
         price: 200
     },
     {
-        title: `${randomstring.generate(10)}_6`,
-        image: 'http://via.placeholder.com/150x150/00FFFF/FF0000.png?text=6',
-        desciption: '',
+        title: 'producto 6',
+        image: 'http://via.placeholder.com/150x150/AA00AA/FFFFFF.png?text=6',
+        description: 'But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness.',
         price: 200
     },
     {
-        title: `${randomstring.generate(10)}_7`,
-        image: 'http://via.placeholder.com/150x150/00FFFF/FF0000.png?text=7',
-        desciption: '',
+        title: 'producto 7',
+        image: 'http://via.placeholder.com/150x150/AA00AA/FFFFFF.png?text=7',
+        description: 'But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness.',
         price: 200
     },
 ];

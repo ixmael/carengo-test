@@ -2,6 +2,6 @@
     "app_name": "carengo-test",
     "port": "3030",
     "api": {
-        "elementsPerPage": 4
+        "elementsPerPage": 9
     }
 }

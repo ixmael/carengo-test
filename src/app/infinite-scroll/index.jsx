@@ -7,7 +7,7 @@ export default class extends React.Component {
 
         this.state = {
             currentPage: 1,
-            nextPage: null,
+            totalProducts: 0,
             products: []
         };
 
@@ -20,15 +20,15 @@ export default class extends React.Component {
 
     loadNext() {
         const self = this;
-        const { products } = this.state;
+        const { products, currentPage } = this.state;
 
-        axios.get(this.props.feedApi)
+        axios.get(this.props.feedApi, { params: { page: currentPage + 1 }})
             .then(response => {
                 const data = response.data;
                 self.setState({
                     ...self.state,
                     currentPage: data.currentPage,
-                    nextPage: data.nextPage,
+                    totalProducts: totalProducts,
                     products: products.concat(data.products)
                 });
             })
@@ -36,19 +36,22 @@ export default class extends React.Component {
     }
 
     render() {
-        const { products } = this.state;
+        const { products, totalProducts } = this.state;
 
         let productsView = (<div>No hay productos</div>);
         if(0 < products.length) {
-            productsView = products.map((p, i) => (<div key={i}>{p.name}</div>));
+            productsView = products.map((p, i) => (<div key={i} className="element">{p.name}</div>));
         }
 
+        let buttonLoad = (<button onClick={this.loadNext}>Cargar más</button>);
+        if(products.length == totalProducts)
+
         return (
-            <div>
+            <div id="infinite-scroll-component">
                 <div>Lista de productos</div>
                 {productsView}
                 <div>Estatus</div>
-                <button onClick={this.loadNext}>Cargar más</button>
+                {buttonLoad}
             </div>
         );
     }

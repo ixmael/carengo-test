@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import ElementView from './element';
 
 export default class extends React.Component {
     constructor(props) {
@@ -56,14 +57,7 @@ export default class extends React.Component {
 
         let productsView = (<div></div>);
         if(0 < products.length) {
-            productsView = products.map((p, i) => (
-                <div key={i} className="element">
-                    {p.title}
-                    <img src={p.image} />
-                    <p>{p.price}</p>
-                    <p>{p.description}</p>
-                </div>
-                ));
+            productsView = products.map((p, i) => (<ElementView key={i} element={p}></ElementView>));
         }
 
         let buttonLoad = (<button onClick={this.loadNext}>Cargar más</button>);

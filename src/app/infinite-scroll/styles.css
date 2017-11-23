@@ -7,3 +7,8 @@
     height: 200px;
     margin-bottom: 10px;
 }
+
+.element img {
+    height: 50px;
+    width: 50px;
+}

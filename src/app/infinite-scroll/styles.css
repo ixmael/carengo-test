@@ -1,8 +1,9 @@
 #infinite-scroll-component {
-    background: #666666;
+    background: #DDDDDD;
 }
 
 .element {
-    background: #cccccc;
+    background: #FFFFFF;
     height: 200px;
+    margin-bottom: 10px;
 }

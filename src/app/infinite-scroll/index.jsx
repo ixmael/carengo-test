@@ -13,10 +13,16 @@ export default class extends React.Component {
         };
 
         this.loadNext = this.loadNext.bind(this);
+        this.handleScroll = this.handleScroll.bind(this);
     }
 
     componentDidMount() {
+        window.addEventListener("scroll", this.handleScroll);
         this.loadNext();
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("scroll", this.handleScroll);
     }
 
     loadNext() {
@@ -50,7 +56,14 @@ export default class extends React.Component {
 
         let productsView = (<div></div>);
         if(0 < products.length) {
-            productsView = products.map((p, i) => (<div key={i} className="element">{p.title}</div>));
+            productsView = products.map((p, i) => (
+                <div key={i} className="element">
+                    {p.title}
+                    <img src={p.image} />
+                    <p>{p.price}</p>
+                    <p>{p.description}</p>
+                </div>
+                ));
         }
 
         let buttonLoad = (<button onClick={this.loadNext}>Cargar más</button>);
@@ -68,8 +81,18 @@ export default class extends React.Component {
                     {status}
                 </div>
                 {productsView}
-                {buttonLoad}
             </div>
         );
+    }
+
+    handleScroll() {
+        const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+        const body = document.body;
+        const html = document.documentElement;
+        const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+        const windowBottom = windowHeight + window.pageYOffset;
+        if (windowBottom >= docHeight) {
+            this.loadNext();
+        }
     }
 }

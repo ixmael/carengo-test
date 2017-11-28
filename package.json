@@ -37,6 +37,8 @@
     "randomstring": "^1.1.5",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
-    "save-dev": "^2.0.0"
+    "react-spinkit": "^3.0.0",
+    "save-dev": "^2.0.0",
+    "sleep": "^5.1.1"
   }
 }

@@ -10,6 +10,11 @@
     color: red;
 }
 
+.status {
+    margin: 10px auto;
+    text-align: center;
+}
+
 @media screen and (min-width: 360px) {
     #infinite-scroll-component {
         width: 100%;

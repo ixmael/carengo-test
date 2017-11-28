@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import ElementView from './element';
+import Spinner from 'react-spinkit';
 
 export default class extends React.Component {
     constructor(props) {
@@ -10,7 +11,8 @@ export default class extends React.Component {
             page: 1,
             products: [],
             totalProducts: 0,
-            isAllLoaded: false
+            isAllLoaded: false,
+            fetching: false
         };
 
         this.loadNext = this.loadNext.bind(this);
@@ -31,6 +33,11 @@ export default class extends React.Component {
         const { page, isAllLoaded, products } = this.state;
 
         if(!isAllLoaded) {
+            this.setState({
+                ...this.state,
+                fetching: true
+            });
+
             axios.get(this.props.feedApi, { params: { page: page }})
                 .then(response => {
                     const data = response.data;
@@ -45,15 +52,22 @@ export default class extends React.Component {
                         page: page + 1,
                         products: products.concat(remoteProducts),
                         totalProducts: data.totalProducts,
-                        isAllLoaded: all
+                        isAllLoaded: all,
+                        fetching: false
                     });
                 })
-                .catch(err => console.log(err));
+                .catch(err => {
+                    console.log(err);
+                    this.setState({
+                        ...this.state,
+                        fetching: true
+                    });
+                });
         }
     }
 
     render() {
-        const { products, totalProducts, currentPage } = this.state;
+        const { products, totalProducts, currentPage, fetching } = this.state;
 
         let productsView = (<div></div>);
         if(0 < products.length) {
@@ -61,11 +75,15 @@ export default class extends React.Component {
         }
 
         let buttonLoad = (<button onClick={this.loadNext}>Cargar más</button>);
-        //if(products.length == totalProducts)
 
         let status = (<div>Cargando productos...</div>);
         if(0 != totalProducts) {
             status = (<div>{products.length} de {totalProducts}</div>);
+        }
+
+        let fetchingDisplay = (<div></div>);
+        if(fetching) {
+            fetchingDisplay = (<Spinner className="status" fadeIn="none" name="wave" color="purple"/>);
         }
 
         return (
@@ -75,6 +93,7 @@ export default class extends React.Component {
                     {status}
                 </div>
                 {productsView}
+                {fetchingDisplay}
             </div>
         );
     }

@@ -4,10 +4,10 @@ Solución del ejercicio para [Carengo](https://github.com/carengo/test-feed).
 Esta solución se realizón con [React](https://reactjs.org/) en el frontend y en el backend con [Express](https://expressjs.com/).
 
 La estructura de carpetas se describe a continuación:
-** config: archivos de configuración de la aplicación node.
-** src: código fuente de las aplicaciones. En **app** se tienen los componentes de frontend y en **server** los componentes de node.
-** static: carpeta donde son obtenidos los archivos css y js.
-** templates: carpeta con los templetas de la aplicación node.
+* **config**: archivos de configuración de la aplicación node.
+* **src**: código fuente de las aplicaciones. En **app** se tienen los componentes de frontend y en **server** los componentes de node.
+* **static**: carpeta donde son obtenidos los archivos css y js.
+* **templates**: carpeta con los templetas de la aplicación node.
 
 ## Instalación de dependencias
 La instalación de esta prueba require instalar los paquetes de Node. En la carpeta del proyecto ejecutar:
